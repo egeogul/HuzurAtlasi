@@ -1,0 +1,121 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FF4444"
+    android:padding="16dp">
+
+    <!-- Acil Durum Başlık -->
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Kimi Aramak İstiyorsunuz?"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="20dp" />
+
+    <!-- Düğme Alanı -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="20dp">
+
+        <!-- Polis -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginEnd="16dp">
+
+            <ImageView
+                android:id="@+id/polisImage"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/polis" />
+
+            <TextView
+                android:id="@+id/polisText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Polis"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <!-- İtfaiye -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginEnd="16dp">
+
+            <ImageView
+                android:id="@+id/itfaiyeImage"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/itfaiye" />
+
+            <TextView
+                android:id="@+id/itfaiyeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="İtfaiye"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <!-- Ambulans -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/ambulansImage"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/ambulans" />
+
+            <TextView
+                android:id="@+id/ambulansText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ambulans"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:gravity="center" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Ana Sayfa ve Klavye Düğmeleri -->
+    <Button
+        android:id="@+id/keyboardButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="Klavye Aç"
+        android:backgroundTint="#FFFFFF"
+        android:textColor="#FF4444"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/homeButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ana Sayfa"
+        android:backgroundTint="#FFFFFF"
+        android:textColor="#FF4444"
+        android:textStyle="bold" />
+</LinearLayout>
+
