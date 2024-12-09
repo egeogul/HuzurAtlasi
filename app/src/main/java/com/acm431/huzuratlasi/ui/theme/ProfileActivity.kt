@@ -1,7 +1,8 @@
-package com.acm431.huzuratlasi
+package com.acm431.huzuratlasi.ui.theme
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.acm431.huzuratlasi.R // R sınıfını projenizin ana paketinden import edin
 
 class ProfileActivity : AppCompatActivity() {
 
@@ -12,3 +13,4 @@ class ProfileActivity : AppCompatActivity() {
         setContentView(R.layout.activity_profile)
     }
 }
+

@@ -12,20 +12,41 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HuzurAtlası"
         tools:targetApi="31">
+
+        <!-- Acil Durum Activity -->
         <activity
-            android:name=".activity_acil_durum"
+            android:name="com.acm431.huzuratlasi.ui.theme.AcilDurumActivity"
             android:exported="false" />
+
+        <!-- OnboardingActivity -->
         <activity
-            android:name=".MainActivity"
+            android:name="com.acm431.huzuratlasi.ui.theme.OnboardingActivity"
             android:exported="true"
-            android:label="@string/app_name"
             android:theme="@style/Theme.HuzurAtlası">
+            <!-- Onboarding başlangıç ekranı olarak ayarlandı -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- MainActivity -->
+        <activity
+            android:name="com.acm431.huzuratlasi.ui.theme.MainActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.HuzurAtlası" />
+
+        <!-- ProfileActivity -->
+        <activity
+            android:name="com.acm431.huzuratlasi.ui.theme.ProfileActivity"
+            android:exported="true"
+            android:label="@string/profile_activity_title"
+            android:theme="@style/Theme.HuzurAtlası" />
+
     </application>
 
 </manifest>
+
+
+
