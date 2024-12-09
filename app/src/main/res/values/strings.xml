@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">HuzurAtlası</string>
+    <string name="profile_image_desc">Profil resmi</string>
+
 </resources>
