@@ -101,5 +101,5 @@ fun EmercencyCaseScreen() {
 @Composable
 fun EmercencyCaseScreenPreview() {
     HuzurAtlasıTheme { Surface { EmercencyCaseScreen() }
-    EmercencyCaseScreen()
-}}
+        EmercencyCaseScreen()
+    }}
