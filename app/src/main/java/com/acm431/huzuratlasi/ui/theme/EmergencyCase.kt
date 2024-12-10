@@ -103,3 +103,4 @@ fun EmercencyCaseScreenPreview() {
     HuzurAtlasıTheme { Surface { EmercencyCaseScreen() }
         EmercencyCaseScreen()
     }}
+

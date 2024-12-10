@@ -1,13 +1,14 @@
 package com.acm431.huzuratlasi.ui.theme
 
-
-
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -19,10 +20,18 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.acm431.huzuratlasi.R
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 
 
 @Composable
 fun LoginScreen() {
+    // Metinleri tutmak için state'ler
+    var name by remember { mutableStateOf("") }
+    var phoneNumber by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+    var confirmPassword by remember { mutableStateOf("") }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -60,8 +69,8 @@ fun LoginScreen() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             OutlinedTextField(
-                value = "",
-                onValueChange = {},
+                value = name,
+                onValueChange = { name = it }, // state güncelleme
                 label = { Text("İsim Soyisim") },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -75,8 +84,8 @@ fun LoginScreen() {
             )
 
             OutlinedTextField(
-                value = "",
-                onValueChange = {},
+                value = phoneNumber,
+                onValueChange = { phoneNumber = it }, // state güncelleme
                 label = { Text("Telefon Numarası") },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -90,8 +99,8 @@ fun LoginScreen() {
             )
 
             OutlinedTextField(
-                value = "",
-                onValueChange = {},
+                value = password,
+                onValueChange = { password = it }, // state güncelleme
                 label = { Text("Şifre") },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -105,8 +114,8 @@ fun LoginScreen() {
             )
 
             OutlinedTextField(
-                value = "",
-                onValueChange = {},
+                value = confirmPassword,
+                onValueChange = { confirmPassword = it }, // state güncelleme
                 label = { Text("Şifre Tekrar") },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -163,3 +172,4 @@ fun LoginScreen() {
 fun LoginScreenPreview() {
     LoginScreen()
 }
+
