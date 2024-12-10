@@ -8,6 +8,7 @@
     Sizlere ilaç saatlerini hatırlatır, acil durumlarda ambulans çağırma olanağı sağlar, önemli tarihlerin takip edilebileceği bir takvim sunar ve ilgi alanlarına göre seçtiğiniz haberleri sunar.
 </string>
     <string name="next_button_label">Tamam</string>
+    <string name="emergencycase">Kimi aramak istiyorsunuz?</string>
     <string name="onboarding_image_desc">Hoş geldiniz görseli</string>
 
 
