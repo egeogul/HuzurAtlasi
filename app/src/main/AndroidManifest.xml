@@ -28,7 +28,7 @@
 
         <!-- OnboardingActivity -->
         <activity
-            android:name="com.acm431.huzuratlasi.ui.theme.OnboardingActivity"
+            android:name="com.acm431.huzuratlasi.ui.theme.OnboardingActivity1"
             android:exported="true"
             android:theme="@style/Theme.HuzurAtlası">
             <!-- Onboarding başlangıç ekranı olarak ayarlandı -->
