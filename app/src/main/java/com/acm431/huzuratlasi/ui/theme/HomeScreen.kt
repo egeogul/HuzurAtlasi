@@ -3,6 +3,8 @@ package com.acm431.huzuratlasi.ui.theme
 import android.widget.CalendarView
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -27,9 +29,9 @@ fun HomeScreen(navController: NavController) {
             ) {
                 Column(
                     modifier = Modifier
-                        .padding(16.dp)
-                        .fillMaxSize(),
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                        .fillMaxSize()
+                        .verticalScroll(rememberScrollState())
+
                 ) {
 
                     // Harita Placeholder
