@@ -10,6 +10,8 @@
     <string name="next_button_label">Tamam</string>
     <string name="emergencycase">Kimi aramak istiyorsunuz?</string>
     <string name="onboarding_image_desc">Hoş geldiniz görseli</string>
+    <string name="home_button_text">Ana Sayfaya Dön</string>
+
 
 
 </resources>

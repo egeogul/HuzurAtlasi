@@ -7,36 +7,39 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.navigation.NavController
+import androidx.navigation.compose.currentBackStackEntryAsState
 
 @Composable
 fun HomeScreen(navController: NavController) {
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = navBackStackEntry?.destination?.route
+
     Scaffold(
         bottomBar = {
-            BottomNavigationBar(navController = navController) // Alt gezinme çubuğu eklendi
+            BottomNavigationBar(navController = navController, currentRoute = currentRoute)
         },
         content = { paddingValues ->
             Surface(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(paddingValues), // Scaffold'dan gelen padding'i uygula
+                    .padding(paddingValues),
                 color = MaterialTheme.colorScheme.background
             ) {
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
                         .verticalScroll(rememberScrollState())
-
                 ) {
-
                     // Harita Placeholder
                     Text(
-                        text = "Haberler",
+                        text = "    Haberler",
                         style = MaterialTheme.typography.headlineSmall
                     )
                     Box(
