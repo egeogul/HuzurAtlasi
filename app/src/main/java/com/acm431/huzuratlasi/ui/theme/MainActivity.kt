@@ -733,8 +733,6 @@ fun InfoTextField(value: String, onValueChange: (String) -> Unit, label: String)
     )
 }
 
-
-
 @Composable
 fun BottomNavigationBar(navController: NavController, currentRoute: String?) {
     NavigationBar(
