@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">HuzurAtlası</string>
+    <string name="profile_image_desc">Profil resmi</string>
+    <string name="profile_activity_title">Profil</string>
+
+    <string name="onboarding_message">Huzur Atlası uygulamasına hoş geldiniz!
+    Bu mobil uygulama, sizlerin günlük yaşamlarını kolaylaştırmayı, sağlık hizmetlerine erişimlerini artırmayı ve sosyal etkileşimlerini güçlendirmeyi hedeflemektedir.
+    Sizlere ilaç saatlerini hatırlatır, acil durumlarda ambulans çağırma olanağı sağlar, önemli tarihlerin takip edilebileceği bir takvim sunar ve ilgi alanlarına göre seçtiğiniz haberleri sunar.
+</string>
+    <string name="next_button_label">Tamam</string>
+    <string name="emergencycase">Kimi aramak istiyorsunuz?</string>
+    <string name="onboarding_image_desc">Hoş geldiniz görseli</string>
+    <string name="home_button_text">Ana Sayfaya Dön</string>
+
+
+
 </resources>
