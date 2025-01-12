@@ -683,7 +683,13 @@ fun ProfileScreen(navController: NavHostController) {
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 InfoTextField(value = birthDate, onValueChange = { birthDate = it }, label = "Doğum Tarihi")
+            }
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
                 InfoTextField(value = age, onValueChange = { age = it }, label = "Yaş")
+
             }
             // İsim Soyisim ve Kan Grubu
             InfoTextField(value = name, onValueChange = { name = it }, label = "İsim Soyisim")
@@ -694,10 +700,14 @@ fun ProfileScreen(navController: NavHostController) {
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 InfoTextField(value = height, onValueChange = { height = it }, label = "Boy")
+
+            }
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
                 InfoTextField(value = weight, onValueChange = { weight = it }, label = "Kilo")
             }
-            // Vücut Kitle Endeksi
-            InfoTextField(value = bmi, onValueChange = { bmi = it }, label = "Vücut Kitle Endeksi")
         }
 
         // Alt Kısım: Ana Sayfa ve Kaydet Butonları
@@ -725,7 +735,7 @@ fun InfoTextField(value: String, onValueChange: (String) -> Unit, label: String)
     OutlinedTextField(
         value = value,
         onValueChange = onValueChange,
-        label = { Text(label) },
+
         modifier = Modifier
             .fillMaxWidth()
             .height(56.dp),
