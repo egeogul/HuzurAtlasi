@@ -17,14 +17,14 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.HuzurAtlası"
+        android:theme="@style/Theme.HuzurAtlasi"
         tools:targetApi="31">
 
         <!-- MainActivity, başlangıç ekranı olarak ayarlandı -->
         <activity
             android:name="com.acm431.huzuratlasi.ui.theme.MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.HuzurAtlası">
+            android:theme="@style/Theme.HuzurAtlasi">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

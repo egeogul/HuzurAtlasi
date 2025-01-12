@@ -65,6 +65,16 @@ import androidx.navigation.compose.rememberNavController
 import com.acm431.huzuratlasi.R
 import androidx.core.view.WindowCompat
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.acm431.huzuratlasi.ui.theme.MedicineScreen
+import com.acm431.huzuratlasi.ui.theme.NewsScreen
+import com.acm431.huzuratlasi.ui.theme.MapScreen
+import com.acm431.huzuratlasi.ui.theme.ProfileScreen
+import com.acm431.huzuratlasi.ui.theme.BottomNavigationBar
+import com.acm431.huzuratlasi.ui.theme.Onboarding1
+import com.acm431.huzuratlasi.ui.theme.Onboarding2
+import com.acm431.huzuratlasi.ui.theme.EmergencyScreen
+import com.acm431.huzuratlasi.ui.theme.LoginPage
+import com.acm431.huzuratlasi.ui.theme.RegisterScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 class MainActivity : ComponentActivity() {
@@ -82,9 +92,27 @@ class MainActivity : ComponentActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
         // Ana ekranı Compose ile set ediyoruz
-            setContent {
-           MainScreen(isOnboardingSeen)
+        setContent {
+            MainScreen(isOnboardingSeen)
         }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun MedicineScreen(navController: NavHostController) {
+    val currentRoute = navController.currentBackStackEntry?.destination?.route
+    
+    Scaffold(
+        bottomBar = {
+            BottomNavigationBar(navController = navController, currentRoute = currentRoute)
+        }
+    ) { paddingValues ->
+        // This is where we call the actual medicine screen content
+        MedicineScreenContent(
+            navController = navController,
+            modifier = Modifier.padding(paddingValues)
+        )
     }
 }
 
@@ -93,684 +121,41 @@ fun MainScreen(isOnboardingSeen: Boolean) {
     val navController = rememberNavController()
     val systemUiController = rememberSystemUiController()
 
-
     Column(modifier = Modifier.fillMaxSize()) {
         NavHost(
             navController = navController,
-            startDestination = if (isOnboardingSeen) "login" else "onboarding1" // Start with login if onboarding seen
+            startDestination = if (isOnboardingSeen) "home" else "onboarding1"
         ) {
-            composable("onboarding1") { Onboarding1(navController = navController) }
-            composable("onboarding2") { Onboarding2(navController = navController) }
-            composable("home") { HomeScreen(navController = navController) }
-            composable("medicine") { MedicineScreen(navController = navController) }
-            composable("emergency") { EmergencyCase(navController = navController) }
-            composable("news") { NewsScreen(navController = navController) }
-            composable("map") { MapScreen(navController = navController) }
-            composable("profile") { ProfileScreen(navController = navController) }
-            composable("login") { LoginPage(navController = navController) } // Add LoginPage route
-            composable("emergency") { EmergencyCase(navController = navController) // Pass navController here
-            }
-        }
-
-        }
-
-
-    }
-
-
-@Composable
-fun LoginPage(navController: NavController) {
-    // Metinleri tutmak için state'ler
-    var name by remember { mutableStateOf("") }
-    var phoneNumber by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-    var confirmPassword by remember { mutableStateOf("") }
-
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(color = Color(0xFFF8FFF4)) // Açık arka plan rengi
-            .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        // Logo
-        Image(
-            painter = painterResource(id = R.drawable.logo), // Logo kaynağını değiştir
-            contentDescription = "Uygulama Logosu",
-            modifier = Modifier
-                .size(150.dp)
-                .padding(top = 32.dp, bottom = 16.dp)
-        )
-
-        // Başlık
-        Text(
-            text = "Huzur Atlası",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color(0xFFD32F2F) // Kırmızı renk
-        )
-
-        Text(
-            text = "Sağlık Yönetimi Uygulaması",
-            fontSize = 16.sp,
-            color = Color.Gray,
-            modifier = Modifier.padding(bottom = 32.dp)
-        )
-
-        // Giriş Formu
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            OutlinedTextField(
-                value = name,
-                onValueChange = { name = it }, // state güncelleme
-                label = { Text("İsim Soyisim") },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 8.dp),
-                leadingIcon = {
-                    Icon(
-                        painter = painterResource(id = R.drawable.person),
-                        contentDescription = "Kullanıcı İkonu"
-                    )
-                }
-            )
-
-            OutlinedTextField(
-                value = phoneNumber,
-                onValueChange = { phoneNumber = it }, // state güncelleme
-                label = { Text("Telefon Numarası") },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 8.dp),
-                leadingIcon = {
-                    Icon(
-                        painter = painterResource(id = R.drawable.telefonikonyeni),
-                        contentDescription = "Telefon İkonu"
-                    )
-                }
-            )
-
-            OutlinedTextField(
-                value = password,
-                onValueChange = { password = it }, // state güncelleme
-                label = { Text("Şifre") },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 8.dp),
-                leadingIcon = {
-                    Icon(
-                        painter = painterResource(id = R.drawable.passwordicon24),
-                        contentDescription = "Şifre İkonu"
-                    )
-                }
-            )
-
-            OutlinedTextField(
-                value = confirmPassword,
-                onValueChange = { confirmPassword = it }, // state güncelleme
-                label = { Text("Şifre Tekrar") },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 8.dp),
-                leadingIcon = {
-                    Icon(
-                        painter = painterResource(id = R.drawable.passwordicon24),
-                        contentDescription = "Şifre Tekrar İkonu"
-                    )
-                }
-            )
-        }
-
-        // Kayıt Ol Butonu
-        Button(
-            onClick = { navController.navigate("home") },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 16.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFD32F2F)),
-            shape = RoundedCornerShape(8.dp)
-        ) {
-            Text(text = "Kayıt Ol", color = Color.White)
-        }
-
-        // Alternatif Giriş
-        Text(
-            text = "veya",
-            color = Color.Gray,
-            modifier = Modifier.padding(vertical = 8.dp)
-        )
-
-        Button(
-            onClick = { /* Google ile giriş işlemi */ },
-            modifier = Modifier.fillMaxWidth(),
-            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4285F4)), // Google mavi renk
-            shape = RoundedCornerShape(8.dp)
-        ) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Icon(
-                    painter = painterResource(id = R.drawable.accountcircle), // Google ikonu
-                    contentDescription = "Google İkonu",
-                    tint = Color.White
-                )
-                Spacer(modifier = Modifier.width(8.dp))
-                Text(text = "Google ile oturum açın", color = Color.White)
-            }
-        }
-    }
-}
-
-
-@Composable
-fun Onboarding1(navController: NavHostController) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        androidx.compose.foundation.layout.Spacer(modifier = Modifier.height(24.dp))
-
-        // Logo
-        Image(
-            painter = painterResource(id = R.drawable.logo), // Replace
-            // with your logo drawable resource
-            contentDescription = "Logo",
-            modifier = Modifier.size(90.dp)
-        )
-
-        androidx.compose.foundation.layout.Spacer(modifier = Modifier.height(24.dp))
-
-        // Illustration
-        Image(
-            painter = painterResource(id = R.drawable.onb1), // Replace with your illustration drawable resource
-            contentDescription = "Illustration",
-            modifier = Modifier.size(400.dp)
-        )
-
-        androidx.compose.foundation.layout.Spacer(modifier = Modifier.height(24.dp))
-
-        // Description text
-        Text(
-            text = "Bu mobil uygulama, sizlerin günlük yaşamlarını kolaylaştırmayı, sağlık hizmetlerine erişimlerini artırmayı ve sosyal etkileşimlerini güçlendirmeyi hedeflemektedir.",
-            style = TextStyle(
-                fontSize = 22.sp,
-                fontWeight = FontWeight.Normal,
-                color = Color.Black
-            ),
-            modifier = Modifier.padding(horizontal = 18.dp),
-            lineHeight = 22.sp
-        )
-
-        androidx.compose.foundation.layout.Spacer(modifier = Modifier.weight(1f))
-
-        // Page Indicator
-        Row(
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            repeat(4) { index ->
-                val color = if (index == 0) Color.DarkGray else Color.LightGray
-                Box(
-                    modifier = Modifier
-                        .size(10.dp)
-                        .padding(4.dp)
-                        .background(color = color, shape = CircleShape)
-                )
-            }
-        }
-
-        androidx.compose.foundation.layout.Spacer(modifier = Modifier.height(24.dp))
-
-        // Next button
-        Button(
-            onClick = { /* Navigate to the next page */ },
-            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF002366)),
-            modifier = Modifier.fillMaxWidth(0.8f)
-        ) {
-            Text(
-                text = "İleri",
-                style = TextStyle(
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.White
-                )
-            )
-        }
-
-        androidx.compose.foundation.layout.Spacer(modifier = Modifier.height(24.dp))
-    }
-}
-
-@Composable
-fun Onboarding2(navController: NavHostController) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Spacer(modifier = Modifier.height(24.dp))
-
-        // Logo
-        Image(
-            painter = painterResource(id = R.drawable.logo), // Replace
-            // with your logo drawable resource
-            contentDescription = "Logo",
-            modifier = Modifier.size(90.dp)
-        )
-
-        Spacer(modifier = Modifier.height(24.dp))
-
-        // Illustration
-        Image(
-            painter = painterResource(id = R.drawable.onb2), // Replace with your illustration drawable resource
-            contentDescription = "Illustration",
-            modifier = Modifier.size(400.dp)
-        )
-
-        Spacer(modifier = Modifier.height(24.dp))
-
-        // Description text
-        Text(
-            text = "Sizlere ilaç saatlerini hatırlatır, acil durumlarda ambulans çağırma olanağı sağlar, önemli tarihlerin takip edilebileceği bir takvim sunar ve haberler sunar. \n",
-            style = TextStyle(
-                fontSize = 22.sp,
-                fontWeight = FontWeight.Normal,
-                color = Color.Black
-            ),
-            modifier = Modifier.padding(horizontal = 18.dp),
-            lineHeight = 22.sp
-        )
-
-        Spacer(modifier = Modifier.weight(1f))
-
-        // Page Indicator
-        Row(
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            repeat(4) { index ->
-                val color = if (index == 1) Color.DarkGray else Color.LightGray
-                Box(
-                    modifier = Modifier
-                        .size(10.dp)
-                        .padding(4.dp)
-                        .background(color = color, shape = CircleShape)
-                )
-            }
-        }
-
-        Spacer(modifier = Modifier.height(24.dp))
-
-        // Next button
-        Button(
-            onClick = { /* Navigate to the next page */ },
-            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF002366)),
-            modifier = Modifier.fillMaxWidth(0.8f)
-        ) {
-            Text(
-                text = "İleri",
-                style = TextStyle(
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.White
-                )
-            )
-        }
-
-        Spacer(modifier = Modifier.height(24.dp))
-    }
-}
-
-@Composable
-fun Spacer(modifier: Modifier) {
-
-}
-
-@Composable
-fun HomeScreenPage(navController: NavHostController) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text("Home Screen")
-    }
-}
-
-@Composable
-fun MedicineScreen(navController: NavHostController) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text("Medicine Screen")
-    }
-}
-
-@Composable
-fun EmergencyCase(navController: NavHostController) {
-    val context = LocalContext.current
-    val scope = rememberCoroutineScope()
-
-    // Launcher for permission request
-    val callPermissionLauncher = rememberLauncherForActivityResult(
-        ActivityResultContracts.RequestPermission()
-    ) { isGranted ->
-        if (!isGranted) {
-            // Handle permission denied (optional: show a Toast or dialog)
-        }
-    }
-
-    fun makePhoneCall(context: Context, phoneNumber: String) {
-        // Check if permission is granted
-        if (ContextCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
-            val intent = Intent(Intent.ACTION_CALL, Uri.parse("tel:$phoneNumber"))
-            context.startActivity(intent)
-        } else {
-            // Request the permission
-            callPermissionLauncher.launch(Manifest.permission.CALL_PHONE)
-        }
-    }
-
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(color = LightBackground)
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(20.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        // Title
-        Text(
-            fontStyle = FontStyle.Italic,
-            textAlign = TextAlign.Center,
-            text = stringResource(R.string.emergencycase),
-            style = MaterialTheme.typography.labelLarge,
-            color = TextColor,
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(LightBackground)
-        )
-
-        // Row with buttons
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
-            // Ambulance Button
-            Button(
-                onClick = { makePhoneCall(context, "112") },
-                modifier = Modifier
-                    .size(100.dp), // Kare buton
-                colors = androidx.compose.material3.ButtonDefaults.buttonColors(
-                    containerColor = ButtonColor
-                )
-            ) {
-                Image(
-                    painter = painterResource(R.drawable.ambulans),
-                    contentDescription = "Ambulans",
-                    modifier = Modifier.size(60.dp),
-                )
-            }
-
-            // Police Button
-            Button(
-                onClick = { makePhoneCall(context, "155") },
-                modifier = Modifier
-                    .size(100.dp), // Kare buton
-                colors = androidx.compose.material3.ButtonDefaults.buttonColors(
-                    containerColor = ButtonColor
-                )
-            ) {
-                Image(
-                    painter = painterResource(R.drawable.polis),
-                    contentDescription = "Polis",
-                    modifier = Modifier.size(60.dp),
-                )
-            }
-
-            // Fire Department Button
-            Button(
-                onClick = { makePhoneCall(context, "110") },
-                modifier = Modifier
-                    .size(100.dp), // Kare buton
-                colors = androidx.compose.material3.ButtonDefaults.buttonColors(
-                    containerColor = ButtonColor
-                )
-            ) {
-                Image(
-                    painter = painterResource(R.drawable.itfaiye),
-                    contentDescription = "İtfaiye",
-                    modifier = Modifier.size(60.dp),
-                )
-            }
-        }
-
-        // Spacer for separation
-        Spacer(modifier = Modifier.height(30.dp))
-
-        // Home Button
-        Button(
-            onClick = { onNavigateToHome() },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 32.dp),
-            colors = androidx.compose.material3.ButtonDefaults.buttonColors(
-                containerColor = ButtonColor
-            )
-        ) {
-            Text(
-                text = stringResource(R.string.home_button_text),
-                color = TextColor,
-                style = MaterialTheme.typography.labelLarge,
-                textAlign = TextAlign.Center
-            )
-        }
-    }
-}
-
-fun onNavigateToHome() {
-    TODO("Not yet implemented")
-}
-
-@Composable
-fun NewsScreen(navController: NavHostController) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text("News Screen")
-    }
-}
-
-@Composable
-fun MapScreen(navController: NavHostController) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text("Map Screen")
-    }
-}
-@Composable
-fun ProfileScreen(navController: NavHostController) {
-    var name by remember { mutableStateOf("Bora") }
-    var birthDate by remember { mutableStateOf("01/01/1980") }
-    var age by remember { mutableStateOf("44") }
-    var height by remember { mutableStateOf("180 cm") }
-    var weight by remember { mutableStateOf("75 kg") }
-    var bmi by remember { mutableStateOf("23.1") }
-    var bloodType by remember { mutableStateOf("A+") }
-
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(color = colorResource(R.color.light_background))
-            .padding(16.dp),
-        verticalArrangement = Arrangement.SpaceBetween
-    ) {
-        // Üst Kısım: Merhaba ve Fotoğraf
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            // Merhaba, Bora
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(
-                    text = "Merhaba, $name",
-                    style = MaterialTheme.typography.headlineSmall,
-                    fontWeight = FontWeight.Bold,
-                    color = colorResource(R.color.black),
-                    modifier = Modifier.padding(start = 40.dp)
-                )
-                Image(
-                    painter = painterResource(R.drawable.default_avatar),
-                    contentDescription = "Profile Picture",
-                    modifier = Modifier
-                        .size(40.dp)
-                        .clip(CircleShape)
-                )
-            }
-
-            // Profil Fotoğrafı
-            Image(
-                painter = painterResource(R.drawable.default_avatar), // Profil fotoğrafı
-                contentDescription = "Profile Image",
-                modifier = Modifier
-                    .size(180.dp)
-                    .padding(vertical = 16.dp)
-                    .clip(CircleShape)
-            )
-        }
-
-        // Orta Kısım: Bilgiler
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp),
-            verticalArrangement = Arrangement.spacedBy(10.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            // Doğum Tarihi ve Yaş
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                InfoTextField(value = birthDate, onValueChange = { birthDate = it }, label = "Doğum Tarihi")
-                InfoTextField(value = age, onValueChange = { age = it }, label = "Yaş")
-            }
-            // İsim Soyisim ve Kan Grubu
-            InfoTextField(value = name, onValueChange = { name = it }, label = "İsim Soyisim")
-            InfoTextField(value = bloodType, onValueChange = { bloodType = it }, label = "Kan Grubu")
-            // Boy ve Kilo
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                InfoTextField(value = height, onValueChange = { height = it }, label = "Boy")
-                InfoTextField(value = weight, onValueChange = { weight = it }, label = "Kilo")
-            }
-            // Vücut Kitle Endeksi
-            InfoTextField(value = bmi, onValueChange = { bmi = it }, label = "Vücut Kitle Endeksi")
-        }
-
-        // Alt Kısım: Ana Sayfa ve Kaydet Butonları
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 16.dp),
-                horizontalArrangement = Arrangement.SpaceEvenly
-            ) {
-                ActionButton(text = "Ana Sayfa", color = Color(0xFF088A8B))
-                ActionButton(text = "Kaydet", color = Color(0xFF274060))
-            }
-
-            // Alt Menü (Simge Bar)
+            composable("onboarding1") { Onboarding1(navController) }
+            composable("onboarding2") { Onboarding2(navController) }
+            composable("login") { LoginPage(navController) }
+            composable("register") { RegisterScreen(navController) }
+            composable("home") { HomeScreen(navController) }
+            composable("medicine") { MedicineScreen(navController) }
+            composable("emergency") { EmergencyScreen(navController) }
+            composable("news") { NewsScreen(navController) }
+            composable("profile") { ProfileScreen(navController) }
         }
     }
 }
 
 @Composable
-fun InfoTextField(value: String, onValueChange: (String) -> Unit, label: String) {
-    OutlinedTextField(
-        value = value,
-        onValueChange = onValueChange,
-        label = { Text(label) },
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(56.dp),
-        shape = RoundedCornerShape(20.dp)
-    )
-}
-
-@Composable
-fun ActionButton(text: String, color: Color) {
-    Button(
-        onClick = {},
-        modifier = Modifier
-            .width(150.dp)
-            .height(50.dp),
-        shape = RoundedCornerShape(20.dp),
-        colors = androidx.compose.material3.ButtonDefaults.buttonColors(
-            containerColor = color
-        )
-    ) {
-        Text(
-            text = text,
-            color = Color.White,
-            fontSize = 16.sp
-        )
-    }
-}
-@Composable
-fun BottomNavigationBar(navController: NavController, currentRoute: String?) {
-    NavigationBar(
-        containerColor = Color.Red // Set background color to red
-    ) {
+fun BottomNavigationBar(navController: NavHostController, currentRoute: String?) {
+    NavigationBar {
         NavigationBarItem(
-            selected = false,
-            onClick = { navController.navigate("home") },
-            label = { Text("Home", color = Color.White) }, // Set label color to white
-            icon = { Icon(Icons.Default.Home, contentDescription = null, tint = Color.White) } // Set icon tint to white
+            icon = { Icon(Icons.Default.Home, contentDescription = "Home") },
+            label = { Text("Ana Sayfa") },
+            selected = currentRoute == "home",
+            onClick = { navController.navigate("home") }
         )
         NavigationBarItem(
-            selected = false,
-            onClick = { navController.navigate("medicine") },
-            label = { Text("Medicine", color = Color.White) }, // Set label color to white
-            icon = { Icon(Icons.Default.MedicalServices, contentDescription = null, tint = Color.White) } // Set icon tint to white
+            icon = { Icon(Icons.Default.Article, contentDescription = "News") },
+            label = { Text("Haberler") },
+            selected = currentRoute == "news",
+            onClick = { navController.navigate("news") }
         )
-        NavigationBarItem(
-            selected = false,
-            onClick = { navController.navigate("emergency") },
-            label = { Text("Emergency", color = Color.White) }, // Set label color to white
-            icon = { Icon(Icons.Default.Warning, contentDescription = null, tint = Color.White) } // Set icon tint to white
-        )
-        NavigationBarItem(
-            selected = false,
-            onClick = { navController.navigate("news") },
-            label = { Text("News", color = Color.White) }, // Set label color to white
-            icon = { Icon(Icons.Default.Article, contentDescription = null, tint = Color.White) } // Set icon tint to white
-        )
-        NavigationBarItem(
-            selected = false,
-            onClick = { navController.navigate("profile") },
-            label = { Text("profile", color = Color.White) }, // Set label color to white
-            icon = { Icon(Icons.Default.Accessibility, contentDescription = null, tint = Color.White) } // Set icon tint to white
-        )
+        // Other navigation items...
     }
 }
+
 
