@@ -751,31 +751,31 @@ fun BottomNavigationBar(navController: NavController, currentRoute: String?) {
         NavigationBarItem(
             selected = false,
             onClick = { navController.navigate("home") },
-            label = { Text("Home", color = Color.White) }, // Set label color to white
+            label = { Text("Ana Sayfa", color = Color.White) }, // Set label color to white
             icon = { Icon(Icons.Default.Home, contentDescription = null, tint = Color.White) } // Set icon tint to white
         )
         NavigationBarItem(
             selected = false,
             onClick = { navController.navigate("medicine") },
-            label = { Text("Medicine", color = Color.White) }, // Set label color to white
+            label = { Text("İlaçlarım", color = Color.White) }, // Set label color to white
             icon = { Icon(Icons.Default.MedicalServices, contentDescription = null, tint = Color.White) } // Set icon tint to white
         )
         NavigationBarItem(
             selected = false,
             onClick = { navController.navigate("emergency") },
-            label = { Text("Emergency", color = Color.White) }, // Set label color to white
+            label = { Text("Acil Durum", color = Color.White) }, // Set label color to white
             icon = { Icon(Icons.Default.Warning, contentDescription = null, tint = Color.White) } // Set icon tint to white
         )
         NavigationBarItem(
             selected = false,
             onClick = { navController.navigate("news") },
-            label = { Text("News", color = Color.White) }, // Set label color to white
+            label = { Text("Haberler", color = Color.White) }, // Set label color to white
             icon = { Icon(Icons.Default.Article, contentDescription = null, tint = Color.White) } // Set icon tint to white
         )
         NavigationBarItem(
             selected = false,
             onClick = { navController.navigate("profile") },
-            label = { Text("profile", color = Color.White) }, // Set label color to white
+            label = { Text("Profilim", color = Color.White) }, // Set label color to white
             icon = { Icon(Icons.Default.Accessibility, contentDescription = null, tint = Color.White) } // Set icon tint to white
         )
     }

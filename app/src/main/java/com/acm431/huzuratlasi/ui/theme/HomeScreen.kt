@@ -75,7 +75,7 @@ fun HomeScreen(navController: NavController) {
                                 .background(Color.LightGray, MaterialTheme.shapes.medium),
                             contentAlignment = Alignment.Center
                         ) {
-                            Text(text = "Raporlarım")
+                            Text(text = "Profilim")
                         }
                         Box(
                             modifier = Modifier
