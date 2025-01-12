@@ -330,7 +330,7 @@ fun Onboarding1(navController: NavHostController) {
 
         // Next button
         Button(
-            onClick = { /* Navigate to the next page */ },
+            onClick = { navController.navigate("onboarding2") },
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF002366)),
             modifier = Modifier.fillMaxWidth(0.8f)
         ) {
@@ -411,7 +411,7 @@ fun Onboarding2(navController: NavHostController) {
 
         // Next button
         Button(
-            onClick = { /* Navigate to the next page */ },
+            onClick = { navController.navigate("login") },
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF002366)),
             modifier = Modifier.fillMaxWidth(0.8f)
         ) {
