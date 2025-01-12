@@ -1,12 +1,16 @@
 package com.acm431.huzuratlasi.ui.theme
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.webkit.WebChromeClient
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
@@ -55,6 +59,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
@@ -104,7 +109,7 @@ fun MainScreen(isOnboardingSeen: Boolean) {
             composable("home") { HomeScreen(navController = navController) }
             composable("medicine") { MedicineScreen(navController = navController) }
             composable("emergency") { EmergencyCase(navController = navController) }
-            composable("news") { NewsScreen(navController = navController) }
+            composable("news") { NewsScreen() }
             composable("map") { MapScreen(navController = navController) }
             composable("profile") { ProfileScreen(navController = navController) }
             composable("login") { LoginPage(navController = navController) } // Add LoginPage route
@@ -586,13 +591,48 @@ fun onNavigateToHome() {
 }
 
 @Composable
+
 fun NewsScreen(navController: NavHostController) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text("News Screen")
+    class NewsActivity : ComponentActivity() {
+        override fun onCreate(savedInstanceState: Bundle?) {
+            super.onCreate(savedInstanceState)
+            setContent {
+                HuzurAtlasıTheme {
+                    Surface(
+                        modifier = Modifier.fillMaxSize(),
+                        color = MaterialTheme.colorScheme.background
+                    ) {
+                        NewsScreen()
+                    }
+                }
+            }
+        }
+    }
+
+    @Composable
+    fun NewsScreen() {
+        val context = LocalContext.current
+        val url = "https://www.cnnturk.com" // İstediğiniz URL'yi buraya koyabilirsiniz
+
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            Text(text = "Haberler", style = MaterialTheme.typography.headlineSmall)
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Button(onClick = {
+                // Tarayıcıyı Açan Intent
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                context.startActivity(intent)
+            }) {
+                Text(text = "Haberi Tarayıcıda Aç")
+            }
+        }
     }
 }
 

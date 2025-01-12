@@ -40,6 +40,7 @@ android {
 }
 
 dependencies {
+    implementation ("androidx.webkit:webkit:1.7.0")
 
     implementation ("androidx.compose.material:material-icons-extended:1.4.3")
     implementation(libs.androidx.core.ktx)
