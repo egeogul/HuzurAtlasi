@@ -456,6 +456,14 @@ fun EmergencyCase(navController: NavHostController) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
 
+    val onNavigateToHome: () -> Unit = {
+        navController.navigate("home") {
+            popUpTo(navController.graph.startDestinationId) {
+                inclusive = true
+            }
+            launchSingleTop = true
+        }
+    }
     // Launcher for permission request
     val callPermissionLauncher = rememberLauncherForActivityResult(
         ActivityResultContracts.RequestPermission()
@@ -600,6 +608,14 @@ fun MapScreen(navController: NavHostController) {
 }
 @Composable
 fun ProfileScreen(navController: NavHostController) {
+    val onNavigateToHome: () -> Unit = {
+        navController.navigate("home") {
+            popUpTo(navController.graph.startDestinationId) {
+                inclusive = true
+            }
+            launchSingleTop = true
+        }
+    }
     var name by remember { mutableStateOf("Bora") }
     var birthDate by remember { mutableStateOf("01/01/1980") }
     var age by remember { mutableStateOf("44") }
@@ -685,21 +701,21 @@ fun ProfileScreen(navController: NavHostController) {
         }
 
         // Alt Kısım: Ana Sayfa ve Kaydet Butonları
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally
+        Button(
+            onClick = { onNavigateToHome() },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 32.dp),
+            colors = androidx.compose.material3.ButtonDefaults.buttonColors(
+                containerColor = ButtonColor
+            )
         ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 16.dp),
-                horizontalArrangement = Arrangement.SpaceEvenly
-            ) {
-                ActionButton(text = "Ana Sayfa", color = Color(0xFF088A8B))
-                ActionButton(text = "Kaydet", color = Color(0xFF274060))
-            }
-
-            // Alt Menü (Simge Bar)
+            Text(
+                text = stringResource(R.string.home_button_text),
+                color = TextColor,
+                style = MaterialTheme.typography.labelLarge,
+                textAlign = TextAlign.Center
+            )
         }
     }
 }
@@ -717,25 +733,8 @@ fun InfoTextField(value: String, onValueChange: (String) -> Unit, label: String)
     )
 }
 
-@Composable
-fun ActionButton(text: String, color: Color) {
-    Button(
-        onClick = {},
-        modifier = Modifier
-            .width(150.dp)
-            .height(50.dp),
-        shape = RoundedCornerShape(20.dp),
-        colors = androidx.compose.material3.ButtonDefaults.buttonColors(
-            containerColor = color
-        )
-    ) {
-        Text(
-            text = text,
-            color = Color.White,
-            fontSize = 16.sp
-        )
-    }
-}
+
+
 @Composable
 fun BottomNavigationBar(navController: NavController, currentRoute: String?) {
     NavigationBar(

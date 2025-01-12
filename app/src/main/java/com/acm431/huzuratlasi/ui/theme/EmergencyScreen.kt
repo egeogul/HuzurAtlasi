@@ -51,6 +51,7 @@ fun EmergencyCaseScreen(onNavigateToHome: () -> Unit) {
         }
     }
 
+
     fun makePhoneCall(context: Context, phoneNumber: String) {
         // Check if permission is granted
         if (ContextCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
@@ -139,6 +140,7 @@ fun EmergencyCaseScreen(onNavigateToHome: () -> Unit) {
         // Spacer for separation
         Spacer(modifier = Modifier.height(30.dp))
 
+
         // Home Button
         Button(
             onClick = { onNavigateToHome() },
@@ -148,7 +150,7 @@ fun EmergencyCaseScreen(onNavigateToHome: () -> Unit) {
             colors = androidx.compose.material3.ButtonDefaults.buttonColors(
                 containerColor = ButtonColor
             )
-        ) {
+        )  {
             Text(
                 text = stringResource(R.string.home_button_text),
                 color = TextColor,
